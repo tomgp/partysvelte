@@ -1,0 +1,6 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "partysvelte-party",
+  "main": "party/index.js",
+  "compatibilityDate": "2024-01-30"
+}
