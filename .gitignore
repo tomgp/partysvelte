@@ -2,7 +2,7 @@
 node_modules
 /build
 /.svelte-kit
-/.party-kit
+.party-kit
 /package
 .env
 .env.*
