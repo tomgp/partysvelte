@@ -1,6 +1,6 @@
 
 <script>
-import {onMount,onDestroy} from "svelte"
+import { onDestroy } from "svelte"
 import * as cookie from 'cookie';
 import PartySocket from "partysocket";
 import {PUBLIC_PARTYKIT_HOST} from '$env/static/public';
@@ -22,7 +22,7 @@ const timeFormat = (d) =>`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
 function add(msg){  
   let time = timeFormat(new Date());
   log.unshift({time, data:msg});
-  log=log;
+  log = log;
 }
 
 function connect(){
@@ -41,8 +41,8 @@ function connect(){
   });
 
   connection.addEventListener("message", function (event) {
-    let [sender, message] = event.data.split(': ')
-    add({ sender, message: JSON.parse(message)});
+    console.log(JSON.parse(event.data))
+//    add(JSON.parse(event.data) );
   });
 
   connection.addEventListener("open", function () {
@@ -51,7 +51,6 @@ function connect(){
     socketState = "open";
     clearInterval(pingInterval);
     pingInterval = setInterval(function () {
-      add({ sender:'outbound -> ', message: {msg:'ping'}})
       connection.send(JSON.stringify({msg:'ping'}));
     }, 2000);
   });

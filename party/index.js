@@ -13,13 +13,18 @@ class PartyServer {
     console.log('CONNECTION', JSON.stringify(details, null,' '))
 
     // Send a message to the connection
-    conn.send("hello from server");
+    conn.send(JSON.stringify({message:`hello from ${this.room.id}`}));
   }
 
   onMessage(message, sender) {
-    console.log(`connection ${sender.id} sent message: ${message}`);
+    console.log(`connection ${sender.id} sent message: ${message} room:${this.room.id}`);
     // Broadcast the received message to all other connections in the room except the sender
-    this.room.broadcast(`${sender.id}: ${message}`, [sender.id]);
+    let messageObject = JSON.parse(message)
+    this.room.broadcast(JSON.stringify({
+      sender:sender.id,
+      message:messageObject,
+      room:this.room.id
+    }));
   }
 }
 
