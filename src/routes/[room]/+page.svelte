@@ -80,6 +80,7 @@ onDestroy(()=>{
   Type your name
 {/if}
 Name <input type="text" bind:value={nameInput}>
+<button on:click={send}>Send</button>
 {socketState}
 <h2>Connection log for the current session</h2>
 <pre>
